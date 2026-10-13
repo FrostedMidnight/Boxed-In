@@ -1102,7 +1102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13db8a859740aa44fb08e4842c8b9503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleManager
-  startGameButton: {fileID: 0}
+  titleText: {fileID: 132395709}
+  startGameButton: {fileID: 1898316628}
+  quitGameButton: {fileID: 1275955271}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

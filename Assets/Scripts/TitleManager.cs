@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
+    public TextMeshProUGUI titleText;
     public Button startGameButton;
+    public Button quitGameButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +23,7 @@ public class TitleManager : MonoBehaviour
     }
 
     public void StartGame(){
+        PauseManager.isGameActive = true;
         SceneManager.LoadScene("Overworld");
     }
 }
