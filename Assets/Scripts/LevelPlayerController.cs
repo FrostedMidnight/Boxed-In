@@ -4,14 +4,18 @@ using UnityEngine.Tilemaps;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
+    [SerializeField] private int levelStepLimit;
+    private int stepsLeft;
+    public int StepsLeft => stepsLeft;
     private bool isMoving = false;
     private Vector3Int currentCell;
+    private Vector3Int initialPosition;
     private InputAction moveUp;
     private InputAction moveDown;
     private InputAction moveRight;
     private InputAction moveLeft;
     [SerializeField] private Grid grid;
-    [SerializeField] private Tilemap ground;
+    [SerializeField] private Tilemap floor;
     [SerializeField] private Tilemap walls;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,18 +25,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
         moveRight = InputSystem.actions.FindAction("MoveRight");
         moveLeft = InputSystem.actions.FindAction("MoveLeft");
 
-        Debug.Log($"MoveUp found: {moveUp != null}");
-        Debug.Log($"MoveDown found: {moveDown != null}");
-        Debug.Log($"MoveRight found: {moveRight != null}");
-        Debug.Log($"MoveLeft found: {moveLeft != null}");
-
-        currentCell = grid.WorldToCell(transform.position);
+        // Sets up initial position and step limit
+        initialPosition = grid.WorldToCell(transform.position);
+        currentCell = initialPosition;
+        stepsLeft = levelStepLimit;
         SnapToGrid();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Controls grid movement
         if (isMoving == false)
         {
             Vector3Int direction = Vector3Int.zero;
@@ -64,24 +67,52 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     private void Move(Vector3Int direction)
     {
-        Debug.Log("moving");
+        // Checks target cell availability and moves
         isMoving = true;
         Vector3Int nextCell = currentCell + direction;
 
-        if (ground != null && ground.HasTile(nextCell))
+        if (floor != null && floor.HasTile(nextCell))
         {
             if (walls == null || !walls.HasTile(nextCell))
             {
-                Debug.Log("if-block executed");
-                currentCell = nextCell;
-                SnapToGrid();
+                BoxController box = GetBoxAt(nextCell);
+                if (box && box.IsMovable(direction))
+                {
+                    box.MoveTo(direction);
+                    currentCell = nextCell;
+                    stepsLeft -= 1;
+                    SnapToGrid();
+                } else if (box == null)
+                {
+                    currentCell = nextCell;
+                    stepsLeft -= 1;
+                    SnapToGrid();
+                }
             }
         }
         isMoving = false;
     }
 
+    private BoxController GetBoxAt(Vector3Int cell)
+    {
+        foreach (BoxController box in FindObjectsByType<BoxController>(FindObjectsSortMode.None))
+        {
+            if (box.CurrentCell == cell)
+                return box;
+        }
+
+        return null;
+    }
+
     private void SnapToGrid()
     {
         transform.position = grid.GetCellCenterWorld(currentCell);
+    }
+
+    public void Restart()
+    {
+        stepsLeft = levelStepLimit;
+        currentCell = initialPosition;
+        SnapToGrid();
     }
 }
