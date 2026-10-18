@@ -11,6 +11,9 @@ public class LevelPauseManager : PauseManager
     [SerializeField] private Button restartNoButton;
     [SerializeField] private Button restartYesButton;
 
+    // Level Clear Text
+    [SerializeField] private TextMeshProUGUI levelClearHeaderText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
