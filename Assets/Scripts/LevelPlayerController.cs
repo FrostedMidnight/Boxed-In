@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
+using UnityEngine.SceneManagement;
+
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     [SerializeField] private int levelStepLimit;
@@ -35,32 +37,35 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Controls grid movement
-        if (isMoving == false)
+        if(PauseManager.isGameActive)
         {
-            Vector3Int direction = Vector3Int.zero;
+            // Controls grid movement
+            if (isMoving == false)
+            {
+                Vector3Int direction = Vector3Int.zero;
 
-            if (moveUp.WasPressedThisFrame())
-            {
-                Debug.Log("UP PRESSED");
-                direction = Vector3Int.up;
-            }
-            if (moveDown.WasPressedThisFrame())
-            {
-                direction = Vector3Int.down;
-            }
-            if (moveRight.WasPressedThisFrame())
-            {
-                direction = Vector3Int.right;
-            }
-            if (moveLeft.WasPressedThisFrame())
-            {
-                direction = Vector3Int.left;
-            }
+                if (moveUp.WasPressedThisFrame())
+                {
+                    Debug.Log("UP PRESSED");
+                    direction = Vector3Int.up;
+                }
+                if (moveDown.WasPressedThisFrame())
+                {
+                    direction = Vector3Int.down;
+                }
+                if (moveRight.WasPressedThisFrame())
+                {
+                    direction = Vector3Int.right;
+                }
+                if (moveLeft.WasPressedThisFrame())
+                {
+                    direction = Vector3Int.left;
+                }
 
-            if (direction != Vector3Int.zero)
-            {
-                Move(direction);
+                if (direction != Vector3Int.zero)
+                {
+                    Move(direction);
+                }
             }
         }
     }
@@ -107,12 +112,5 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private void SnapToGrid()
     {
         transform.position = grid.GetCellCenterWorld(currentCell);
-    }
-
-    public void Restart()
-    {
-        stepsLeft = levelStepLimit;
-        currentCell = initialPosition;
-        SnapToGrid();
     }
 }

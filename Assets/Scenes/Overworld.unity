@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 1217960976}
   - component: {fileID: 1217960977}
   m_Layer: 0
-  m_Name: PauseManager
+  m_Name: OverworldPauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseHeaderText: {fileID: 1536335390}
   resumeButton: {fileID: 308386631}
-  returnToTitleButton: {fileID: 579392056}
+  returnButton: {fileID: 579392056}
 --- !u!1 &1536335388
 GameObject:
   m_ObjectHideFlags: 0
