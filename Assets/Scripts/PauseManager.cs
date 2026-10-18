@@ -8,9 +8,10 @@ public class PauseManager : MonoBehaviour
 {
     public static bool isGameActive = true;
 
-    public TextMeshProUGUI pauseHeaderText;
-    public Button resumeButton;
-    public Button returnToTitleButton;
+    // Pause Menu UI
+    [SerializeField] private TextMeshProUGUI pauseHeaderText;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button returnButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,17 +22,14 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(isGameActive) PauseGame();
-            else ResumeGame();
-        }
+        
     }
 
     public void PauseGame()
     {
         pauseHeaderText.gameObject.SetActive(true);
         resumeButton.gameObject.SetActive(true);
-        returnToTitleButton.gameObject.SetActive(true);
+        returnButton.gameObject.SetActive(true);
         isGameActive = false;
     }
 
@@ -39,12 +37,7 @@ public class PauseManager : MonoBehaviour
     {
         pauseHeaderText.gameObject.SetActive(false);
         resumeButton.gameObject.SetActive(false);
-        returnToTitleButton.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(false);
         isGameActive = true;
-    }
-
-    public void ReturnToTitle()
-    {
-        SceneManager.LoadScene("Title");
     }
 }
