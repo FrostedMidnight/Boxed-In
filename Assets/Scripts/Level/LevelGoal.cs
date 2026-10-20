@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class LevelGoal : MonoBehaviour
 {
-    [SerializeField] private Grid grid;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,7 +18,10 @@ public class LevelGoal : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("Player won");
+            if (LevelUIManager.Instance != null)
+            {
+                LevelUIManager.Instance.Wins();
+            }
         }
     }
 }
