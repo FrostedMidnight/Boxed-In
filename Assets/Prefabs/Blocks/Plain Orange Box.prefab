@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7403054343348244866}
   - component: {fileID: 3894477731777048185}
   m_Layer: 0
-  m_Name: tempbox
+  m_Name: Plain Orange Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 1797301881
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d126ffe993984f74fb6641c1e888956d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b4900c2712aa82145a9032d43b05bf1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.9775, y: 0.98}
+  m_Size: {x: 0.9, y: 0.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

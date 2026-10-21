@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
@@ -7,37 +7,43 @@ using UnityEngine.UI;
 public class PauseManager : MonoBehaviour
 {
     public static bool isGameActive = true;
-
+    private InputAction escape;
     // Pause Menu UI
-    [SerializeField] private TextMeshProUGUI pauseHeaderText;
-    [SerializeField] private Button resumeButton;
-    [SerializeField] private Button returnButton;
+    [SerializeField] private GameObject pauseMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
-        
+        escape = InputSystem.actions.FindAction("Escape");
+        pauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        
+        if (escape.WasPressedThisFrame())
+        {
+            Debug.Log("escape pressed");
+            if (isGameActive)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ResumeGame();
+            }
+        }
     }
 
     public void PauseGame()
     {
-        pauseHeaderText.gameObject.SetActive(true);
-        resumeButton.gameObject.SetActive(true);
-        returnButton.gameObject.SetActive(true);
+        pauseMenu.SetActive(true);
         isGameActive = false;
     }
 
     public void ResumeGame()
     {
-        pauseHeaderText.gameObject.SetActive(false);
-        resumeButton.gameObject.SetActive(false);
-        returnButton.gameObject.SetActive(false);
+        pauseMenu.SetActive(false);
         isGameActive = true;
     }
 }

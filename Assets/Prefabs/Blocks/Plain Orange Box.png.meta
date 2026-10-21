@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bfeebf06d793c18449d2f6c6668b51c1
+guid: b4900c2712aa82145a9032d43b05bf1b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2868539044483428322
-    second: wall_0
+      213: 2736938145581271795
+    second: Plain Orange Box_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 420
+  spritePixelsToUnits: 2000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wall_0
+      name: Plain Orange Box_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 420
-        height: 420
+        x: 156
+        y: 155
+        width: 1484
+        height: 1469
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2efe5c210191fc720800000000000000
-      internalID: 2868539044483428322
+      spriteID: 3fa86931ebe8bf520800000000000000
+      internalID: 2736938145581271795
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      wall_0: 2868539044483428322
+      Plain Orange Box_0: 2736938145581271795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

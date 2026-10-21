@@ -16,9 +16,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private InputAction moveDown;
     private InputAction moveRight;
     private InputAction moveLeft;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap floor;
     [SerializeField] private Tilemap walls;
+    [SerializeField] private Sprite catInitialSprite;
+    [SerializeField] private Sprite catUp;
+    [SerializeField] private Sprite catDown;
+    [SerializeField] private Sprite catLeft;
+    [SerializeField] private Sprite catRight;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +32,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
         moveDown = InputSystem.actions.FindAction("MoveDown");
         moveRight = InputSystem.actions.FindAction("MoveRight");
         moveLeft = InputSystem.actions.FindAction("MoveLeft");
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = catInitialSprite;
 
         // Sets up initial position and step limit
         initialPosition = grid.WorldToCell(transform.position);
@@ -46,19 +55,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
                 if (moveUp.WasPressedThisFrame())
                 {
-                    Debug.Log("UP PRESSED");
+                    spriteRenderer.sprite = catUp;
                     direction = Vector3Int.up;
                 }
                 if (moveDown.WasPressedThisFrame())
                 {
+                    spriteRenderer.sprite = catDown;
                     direction = Vector3Int.down;
                 }
                 if (moveRight.WasPressedThisFrame())
                 {
+                    spriteRenderer.sprite = catRight;
                     direction = Vector3Int.right;
                 }
                 if (moveLeft.WasPressedThisFrame())
                 {
+                    spriteRenderer.sprite = catLeft;
                     direction = Vector3Int.left;
                 }
 
@@ -112,5 +124,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private void SnapToGrid()
     {
         transform.position = grid.GetCellCenterWorld(currentCell);
+    }
+
+    public void Restart()
+    {
+        spriteRenderer.sprite = catInitialSprite;
+        stepsLeft = levelStepLimit;
+        currentCell = initialPosition;
+        SnapToGrid();
     }
 }
