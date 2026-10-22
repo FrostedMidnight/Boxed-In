@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     public static bool isGameActive = true;
     private InputAction escape;
     // Pause Menu UI
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] protected GameObject pauseMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()

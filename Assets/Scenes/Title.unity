@@ -2040,10 +2040,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1481705083}
-  - component: {fileID: 1481705084}
   - component: {fileID: 1481705085}
+  - component: {fileID: 1481705084}
   m_Layer: 0
-  m_Name: TitleSoundManager
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
