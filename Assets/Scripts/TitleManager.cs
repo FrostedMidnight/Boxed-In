@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
-    // public TextMeshProUGUI titleText;
-    // public Button startGameButton;
-    // public Button quitGameButton;
-
     public GameObject titleMenu;
     public GameObject settingsMenu;
 

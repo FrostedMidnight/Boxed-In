@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour
     private InputAction escape;
     // Pause Menu UI
     [SerializeField] protected GameObject pauseMenu;
+    [SerializeField] protected GameObject settingsMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
@@ -45,5 +46,17 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         isGameActive = true;
+    }
+
+    public void OpenSettings()
+    {
+        settingsMenu.gameObject.SetActive(true);
+        pauseMenu.gameObject.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        settingsMenu.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(true);
     }
 }
