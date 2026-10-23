@@ -35,19 +35,21 @@ public class BoxController : MonoBehaviour
         transform.position = grid.GetCellCenterWorld(currentCell);
     }
 
-    public void MoveTo(Vector3Int direction)
+    public int MoveTo(Vector3Int direction)
     {
+        int costToMove = 2;
         nextCell = currentCell + direction;
         BoxController box = GetBoxAt(nextCell);
         if (box != null)
         {
-            box.MoveTo(direction);
+            costToMove += box.MoveTo(direction);
         }
 
         currentCell = nextCell;
         SnapToGrid();
 
         boxAudioSource.PlayOneShot(boxMoveSound, SoundManager.sfxVolume);
+        return costToMove;
     }
 
     public bool IsMovable(Vector3Int direction)

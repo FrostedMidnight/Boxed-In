@@ -100,6 +100,7 @@ public class LevelPlayerController : MonoBehaviour
     {
         // Checks target cell availability and moves
         isMoving = true;
+        int stepCost = 1;
         Vector3Int nextCell = currentCell + direction;
 
         if (floor != null && floor.HasTile(nextCell))
@@ -109,14 +110,14 @@ public class LevelPlayerController : MonoBehaviour
                 BoxController box = GetBoxAt(nextCell);
                 if (box && box.IsMovable(direction))
                 {
-                    box.MoveTo(direction);
+                    stepCost = box.MoveTo(direction);
                     currentCell = nextCell;
-                    levelManager.DecrementStep(2);
+                    levelManager.DecrementStep(stepCost);
                     SnapToGrid();
                 } else if (box == null)
                 {
                     currentCell = nextCell;
-                    levelManager.DecrementStep(1);
+                    levelManager.DecrementStep(stepCost);
                     SnapToGrid();
                 }
             }
