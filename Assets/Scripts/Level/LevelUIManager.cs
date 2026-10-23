@@ -13,6 +13,7 @@ public class LevelUIManager : PauseManager
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private DialogueTrigger levelStartDialogue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -33,6 +34,8 @@ public class LevelUIManager : PauseManager
         levelClearMenu.SetActive(false);
         restart = InputSystem.actions.FindAction("Restart");
         uiAudioSource = GetComponent<AudioSource>();
+
+        levelStartDialogue.TriggerDialogue();
     }
 
     // Update is called once per frame
