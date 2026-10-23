@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences;
 
     [SerializeField] GameObject dialogueBox;
-    [SerializeField] GameObject testDialogueButton;
+    [SerializeField] GameObject dialogueContinueButton;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue[] dialogueSequence)
     {
+        dialogueBox.SetActive(true);
+        dialogueContinueButton.SetActive(true);
         // Debug.Log("Starting dialogue");
         dialogues.Clear();
 
@@ -99,7 +101,7 @@ public class DialogueManager : MonoBehaviour
     {
         // Debug.Log("End of dialogue");
         dialogueBox.gameObject.SetActive(false);
-        testDialogueButton.gameObject.SetActive(false);
+        dialogueContinueButton.gameObject.SetActive(false);
         character.gameObject.SetActive(false);
     }
 }

@@ -9,11 +9,11 @@ public class LevelUIManager : PauseManager
     private InputAction restart;
     // UI pages
     [SerializeField] private GameObject restartMenu;
-    [SerializeField] private GameObject levelClearMenu;
     [SerializeField] private GameObject gamePlayUI;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private DialogueTrigger levelStartDialogue;
+    [SerializeField] private DialogueTrigger winDialogueTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -31,7 +31,6 @@ public class LevelUIManager : PauseManager
 
         gamePlayUI.SetActive(true);
         restartMenu.SetActive(false);
-        levelClearMenu.SetActive(false);
         restart = InputSystem.actions.FindAction("Restart");
         uiAudioSource = GetComponent<AudioSource>();
 
@@ -46,20 +45,12 @@ public class LevelUIManager : PauseManager
         {
             WantToRestart();
         }
-        if (isGameActive)
-        {
-            if (levelManager.RemainingSteps <= 0)
-            {
-                GameOver();
-            }
-        }
     }
 
     private void RestartUI()
     {
         gamePlayUI.SetActive(true);
         restartMenu.SetActive(false);
-        levelClearMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         ClosePauseMenu();
     }
@@ -108,6 +99,7 @@ public class LevelUIManager : PauseManager
 
     public void Wins()
     {
-        levelClearMenu.SetActive(true);
+        winDialogueTrigger.TriggerDialogue();
+        // Somehow go to overworld AFTER this dialogue finishes
     }
 }

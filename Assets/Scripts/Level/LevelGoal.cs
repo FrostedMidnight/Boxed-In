@@ -23,14 +23,10 @@ public class LevelGoal : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            if (LevelUIManager.Instance != null)
-            {
-                LevelUIManager.Instance.Wins();
-                SoundManager.managerAudioSource.Stop();
-                goalAudioSource.PlayOneShot(levelCompleteStringer, SoundManager.bgmVolume);
-                goalAudioSource.volume = SoundManager.bgmVolume;
-                goalAudioSource.PlayDelayed(1.2f);
-            }
+            SoundManager.managerAudioSource.Stop();
+            goalAudioSource.PlayOneShot(levelCompleteStringer, SoundManager.bgmVolume);
+            goalAudioSource.volume = SoundManager.bgmVolume;
+            goalAudioSource.PlayDelayed(1.2f);
         }
     }
 }
