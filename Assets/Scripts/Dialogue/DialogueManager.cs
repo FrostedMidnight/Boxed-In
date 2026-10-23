@@ -8,6 +8,11 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    private Queue<Dialogue> dialogues;
+    [SerializeField] private Image character;
+    [SerializeField] private RectTransform leftCharacterPosition;
+    [SerializeField] private RectTransform rightCharacterPosition;
+
 
     private Queue<string> sentences;
 
@@ -18,13 +23,41 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+        dialogues = new Queue<Dialogue>();
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue[] dialogueSequence)
     {
         // Debug.Log("Starting dialogue");
+        dialogues.Clear();
+
+        foreach (Dialogue dialogue in dialogueSequence)
+        {
+            dialogues.Enqueue(dialogue);
+        }
+
+        DisplayNextDialogue();
+    }
+
+    public void DisplayNextDialogue()
+    {
+        if (dialogues.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
+
+        Dialogue dialogue = dialogues.Dequeue();
 
         nameText.text = dialogue.name;
+        character.sprite = dialogue.image;
+        character.gameObject.SetActive(character != null);
+
+        RectTransform characterPosition = (dialogue.position == ImagePosition.Left)
+        ? leftCharacterPosition
+        : rightCharacterPosition;
+
+        character.rectTransform.anchoredPosition = characterPosition.anchoredPosition;
 
         sentences.Clear();
 
@@ -40,7 +73,7 @@ public class DialogueManager : MonoBehaviour
     {
         if(sentences.Count == 0)
         {
-            EndDialogue();
+            DisplayNextDialogue();
             return;
         }
 
@@ -67,5 +100,6 @@ public class DialogueManager : MonoBehaviour
         // Debug.Log("End of dialogue");
         dialogueBox.gameObject.SetActive(false);
         testDialogueButton.gameObject.SetActive(false);
+        character.gameObject.SetActive(false);
     }
 }

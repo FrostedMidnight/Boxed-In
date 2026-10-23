@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
+    public Dialogue[] dialogues;
 
     public void TriggerDialogue()
     {
-        FindAnyObjectByType<DialogueManager>().StartDialogue(dialogue);
+        FindAnyObjectByType<DialogueManager>().StartDialogue(dialogues);
     }
 }
