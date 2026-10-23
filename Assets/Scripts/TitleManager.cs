@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
-    public GameObject titleMenu;
-    public GameObject settingsMenu;
+    [SerializeField] private GameObject titleMenu;
+    [SerializeField] private GameObject settingsMenu;
+    private AudioSource uiAudioSource;
+    [SerializeField] private AudioClip clickSound;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        uiAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class TitleManager : MonoBehaviour
     public void StartGame()
     {
         PauseManager.isGameActive = true;
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         SceneManager.LoadScene("Overworld");
     }
 
@@ -31,11 +35,13 @@ public class TitleManager : MonoBehaviour
     {
         settingsMenu.gameObject.SetActive(true);
         titleMenu.gameObject.SetActive(false);
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
     }
 
     public void CloseSettings()
     {
         settingsMenu.gameObject.SetActive(false);
         titleMenu.gameObject.SetActive(true);
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
     }
 }

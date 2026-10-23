@@ -30,6 +30,8 @@ public class LevelUIManager : PauseManager
         levelClearMenu.SetActive(false);
         restart = InputSystem.actions.FindAction("Restart");
         gameWon = false;
+
+        uiAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,24 +46,28 @@ public class LevelUIManager : PauseManager
 
     public void ReturnToOverworld()
     {
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         isGameActive = true;
         SceneManager.LoadScene("Overworld");
     }
 
     public void WantToRestart()
     {
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         isGameActive = false;
         restartMenu.SetActive(true);
     }
 
     public void NoRestart()
     {
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         isGameActive = true;
         restartMenu.SetActive(false);
     }
 
     public void YesRestart()
     {
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         isGameActive = true;
         string currentlevel = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentlevel);

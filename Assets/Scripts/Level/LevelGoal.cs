@@ -26,12 +26,10 @@ public class LevelGoal : MonoBehaviour
             if (LevelUIManager.Instance != null)
             {
                 LevelUIManager.Instance.Wins();
-                // levelCompleteVolume = SoundManager.bgmVolume;
-                // Debug.Log("BGM Volume: " + levelCompleteVolume);
                 SoundManager.managerAudioSource.Stop();
-                goalAudioSource.PlayOneShot(levelCompleteStringer, 0.5f);
+                goalAudioSource.PlayOneShot(levelCompleteStringer, SoundManager.bgmVolume);
+                goalAudioSource.volume = SoundManager.bgmVolume;
                 goalAudioSource.PlayDelayed(1.2f);
-                // goalAudioSource.PlayOneShot(levelCompleteMusic, 0.5f);
             }
         }
     }
