@@ -8,6 +8,7 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] private GameObject titleMenu;
     [SerializeField] private GameObject settingsMenu;
+
     private AudioSource uiAudioSource;
     [SerializeField] private AudioClip clickSound;
     
@@ -35,6 +36,7 @@ public class TitleManager : MonoBehaviour
     {
         settingsMenu.gameObject.SetActive(true);
         titleMenu.gameObject.SetActive(false);
+        Debug.Log("UI SFX Volume:" + SoundManager.sfxVolume);
         uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
     }
 
@@ -42,6 +44,7 @@ public class TitleManager : MonoBehaviour
     {
         settingsMenu.gameObject.SetActive(false);
         titleMenu.gameObject.SetActive(true);
+        Debug.Log("UI SFX Volume:" + SoundManager.sfxVolume);
         uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
     }
 }

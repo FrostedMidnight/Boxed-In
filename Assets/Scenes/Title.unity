@@ -2186,7 +2186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   bgmVolumeSlider: {fileID: 1116440313}
-  sfxVolumeSlider: {fileID: 1116440313}
+  sfxVolumeSlider: {fileID: 18224522}
 --- !u!1 &1500310487
 GameObject:
   m_ObjectHideFlags: 0
