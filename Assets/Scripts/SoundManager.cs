@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    private AudioSource managerAudioSource;
+    public static AudioSource managerAudioSource;
     public Slider bgmVolumeSlider;
-    public static float bgmVolume;
+
     // public Slider sfxVolumeSlider;
-    // public static float sfxVolume;
+    public static float bgmVolume;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
