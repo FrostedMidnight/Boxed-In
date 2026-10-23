@@ -18,6 +18,7 @@ public class PauseManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        isGameActive = true;
         escape = InputSystem.actions.FindAction("Escape");
         pauseMenu.SetActive(false);
 
@@ -39,6 +40,11 @@ public class PauseManager : MonoBehaviour
                 ResumeGame();
             }
         }
+    }
+
+    protected void ClosePauseMenu()
+    {
+        pauseMenu.SetActive(false);
     }
 
     public void PauseGame()

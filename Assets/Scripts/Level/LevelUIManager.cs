@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class LevelUIManager : PauseManager
 {
     public static LevelUIManager Instance { get; private set; }
-    private bool gameWon;
     private InputAction restart;
     // UI pages
     [SerializeField] private GameObject restartMenu;
     [SerializeField] private GameObject levelClearMenu;
+    [SerializeField] private GameObject gamePlayUI;
+    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private LevelManager levelManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -26,11 +28,10 @@ public class LevelUIManager : PauseManager
             Instance = this;
         }
 
+        gamePlayUI.SetActive(true);
         restartMenu.SetActive(false);
         levelClearMenu.SetActive(false);
         restart = InputSystem.actions.FindAction("Restart");
-        gameWon = false;
-
         uiAudioSource = GetComponent<AudioSource>();
     }
 
@@ -42,6 +43,22 @@ public class LevelUIManager : PauseManager
         {
             WantToRestart();
         }
+        if (isGameActive)
+        {
+            if (levelManager.RemainingSteps <= 0)
+            {
+                GameOver();
+            }
+        }
+    }
+
+    private void RestartUI()
+    {
+        gamePlayUI.SetActive(true);
+        restartMenu.SetActive(false);
+        levelClearMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+        ClosePauseMenu();
     }
 
     public void ReturnToOverworld()
@@ -51,11 +68,24 @@ public class LevelUIManager : PauseManager
         SceneManager.LoadScene("Overworld");
     }
 
+    public void ReturnToTitle()
+    {
+        uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
+        isGameActive = true;
+        SceneManager.LoadScene("Title");
+    }
+
     public void WantToRestart()
     {
         uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         isGameActive = false;
         restartMenu.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverMenu.SetActive(true);
     }
 
     public void NoRestart()
@@ -69,13 +99,12 @@ public class LevelUIManager : PauseManager
     {
         uiAudioSource.PlayOneShot(clickSound, SoundManager.sfxVolume);
         isGameActive = true;
-        string currentlevel = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentlevel);
+        RestartUI();
+        levelManager.RestartLevel();
     }
 
     public void Wins()
     {
-        gameWon = true;
         levelClearMenu.SetActive(true);
     }
 }

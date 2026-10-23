@@ -4,11 +4,8 @@ using UnityEngine.Tilemaps;
 
 using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class LevelPlayerController : MonoBehaviour
 {
-    [SerializeField] private int levelStepLimit;
-    private int stepsLeft;
-    public int StepsLeft => stepsLeft;
     private bool isMoving = false;
     private Vector3Int currentCell;
     private Vector3Int initialPosition;
@@ -20,6 +17,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap floor;
     [SerializeField] private Tilemap walls;
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private Sprite catInitialSprite;
     [SerializeField] private Sprite catUp;
     [SerializeField] private Sprite catDown;
@@ -45,7 +43,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // Sets up initial position and step limit
         initialPosition = grid.WorldToCell(transform.position);
         currentCell = initialPosition;
-        stepsLeft = levelStepLimit;
         SnapToGrid();
 
         playerAudioSource = GetComponent<AudioSource>();
@@ -114,12 +111,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 {
                     box.MoveTo(direction);
                     currentCell = nextCell;
-                    stepsLeft -= 1;
+                    levelManager.DecrementStep(2);
                     SnapToGrid();
                 } else if (box == null)
                 {
                     currentCell = nextCell;
-                    stepsLeft -= 1;
+                    levelManager.DecrementStep(1);
                     SnapToGrid();
                 }
             }
@@ -146,7 +143,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public void Restart()
     {
         spriteRenderer.sprite = catInitialSprite;
-        stepsLeft = levelStepLimit;
         currentCell = initialPosition;
         SnapToGrid();
     }
