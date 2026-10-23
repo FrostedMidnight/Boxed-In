@@ -86,13 +86,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 {
                     Move(direction);
                     AudioClip footstepSound = footstepSounds[Random.Range(0,footstepSounds.Length)];
-                    playerAudioSource.PlayOneShot(footstepSound, 0.5f);
+                    playerAudioSource.PlayOneShot(footstepSound, SoundManager.sfxVolume);
 
                     int willMeowInt = Random.Range(0,10);
                     if(willMeowInt < 1)
                     {
                         AudioClip meow = meows[Random.Range(0,meows.Length)];
-                        playerAudioSource.PlayOneShot(meow, 0.5f);
+                        playerAudioSource.PlayOneShot(meow, SoundManager.sfxVolume);
                     }
                 }
             }
