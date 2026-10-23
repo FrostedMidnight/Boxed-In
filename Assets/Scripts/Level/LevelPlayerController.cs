@@ -25,6 +25,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] private Sprite catDown;
     [SerializeField] private Sprite catLeft;
     [SerializeField] private Sprite catRight;
+
+    // SFX
+    private AudioSource playerAudioSource;
+    [SerializeField] private AudioClip[] footstepSounds;
+    [SerializeField] private AudioClip[] meows;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,6 +47,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         currentCell = initialPosition;
         stepsLeft = levelStepLimit;
         SnapToGrid();
+
+        playerAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -77,6 +85,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 if (direction != Vector3Int.zero)
                 {
                     Move(direction);
+                    AudioClip footstepSound = footstepSounds[Random.Range(0,footstepSounds.Length)];
+                    playerAudioSource.PlayOneShot(footstepSound, 0.5f);
+
+                    int willMeowInt = Random.Range(0,10);
+                    if(willMeowInt < 1)
+                    {
+                        AudioClip meow = meows[Random.Range(0,meows.Length)];
+                        playerAudioSource.PlayOneShot(meow, 0.5f);
+                    }
                 }
             }
         }
